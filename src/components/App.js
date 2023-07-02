@@ -28,6 +28,9 @@ const App = () => {
 
     changeBackgroundColor();
   }
+  useEffect(() => {
+    getresponse();
+  }, []);
 
   const changeBackgroundColor = () => {
     const randomColor = colors[Math.floor(Math.random() * colors.length)];
