@@ -17,18 +17,17 @@ var colors = [
 ];
 
 const App = () => {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState({ content: "", author: "" });
 
   async function getresponse() {
     const data = await fetch("https://api.quotable.io/random");
     const response = await data.json();
-    setData(response.content, response.author);
+    setData({ content: response.content, author: response.author });
+    console.log(response.content);
+    console.log(response.author);
 
     changeBackgroundColor();
   }
-  useEffect(() => {
-    getresponse();
-  }, []);
 
   const changeBackgroundColor = () => {
     const randomColor = colors[Math.floor(Math.random() * colors.length)];
@@ -38,8 +37,8 @@ const App = () => {
   return (
     <div id="main">
       <div id="wrapper">
-        <div className="quote-text">{data}</div>
-        <div className="quote-author">{data}</div>
+        <div className="quote-text">{data.content}</div>
+        <div className="quote-author">{data.author}</div>
         <button id="new-quote" onClick={getresponse}>
           New Quote
         </button>
